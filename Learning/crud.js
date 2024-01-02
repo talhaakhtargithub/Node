@@ -6,7 +6,7 @@ const filePath = `${dirPath}/apple.txt`;  // Corrected variable name to dirPath
 
 //>> File Created
 
-// fs.writeFileSync(filePath, 'This is me Talha');
+fs.writeFileSync(filePath, 'This is me Talha');
 
 
 //>> File Read
@@ -21,7 +21,12 @@ const filePath = `${dirPath}/apple.txt`;  // Corrected variable name to dirPath
 //     if(!err){console.log("File is Updated");}
 // })
 
-//>> File Name is Updated
+// >> File Name is Updated
 fs.rename(filePath,`${dirPath}/frui.txt`,(err)=>{
     if(!err){console.log("FileName is Updated");}
 })
+
+
+
+
+fs.unlinkSync(`${dirPath}/fruit.txt`)
