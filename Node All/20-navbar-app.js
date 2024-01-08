@@ -1,37 +1,38 @@
-const http = require('http')
-const {readFileSync} = require('fs')
+const express = require('express');
+const fs = require('fs/promises');
 
-const home = readFileSync('./navbar-app/index.html')
-const homestyle = readFileSync('./navbar-app/style.css')
+const app = express();
+const port = 5000;
 
-const server = http.createServer((req,res)=>{
-    // console.log(req.method);
-    // console.log(req.url);
-    if (req.url === '/') {
-        res.writeHead(200,{'content-type':'text/html'})
-        res.write(home)
-        res.end()
+app.get('/', async (req, res) => {
+    try {
+        const home = await fs.readFile('./navbar-app/index.html', 'utf-8');
+        res.send(home);
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Internal Server Error');
     }
-    else if(req.url === '/about'){
-        res.writeHead(200,{'content-type':'text/html'})
-        res.write(`
-        <h1>About Page</h1>
-        `)
-        res.end()
-    }
-    //style.css
-    else if(req.url === '/style.css'){
-        res.writeHead(200,{'content-type':'text/css'})
-        res.write(homestyle)
-        res.end()
-    }
-    else{
-        res.writeHead(404,{'content-type':'text/html'})
-        res.write(`
-        <h1>Page not found</h1>
-        `)
-        res.end()
-    }
-})
+});
 
-server.listen(5000)
+app.get('/about', (req, res) => {
+    res.send('<h1>About Page</h1>');
+});
+
+app.get('/style.css', async (req, res) => {
+    try {
+        const homestyle = await fs.readFile('./navbar-app/style.css', 'utf-8');
+        res.setHeader('Content-Type', 'text/css');
+        res.send(homestyle);
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Internal Server Error');
+    }
+});
+
+app.use((req, res) => {
+    res.status(404).send('<h1>Page not found</h1>');
+});
+
+app.listen(port, () => {
+    console.log(`Server is listening on port ${port}`);
+});

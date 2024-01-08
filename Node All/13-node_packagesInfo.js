@@ -16,6 +16,8 @@ const lodash = require('lodash')
 
 const cmplxArray = [1,[2,[3,[4]]]];
 const flatArray = lodash.flattenDeep(cmplxArray);
+const arr=lodash.compact(cmplxArray)
 
+console.log(flatArray);
 console.log(flatArray);
 console.log("Hello People!!! and world also!!!");

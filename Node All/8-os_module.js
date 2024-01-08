@@ -1,10 +1,12 @@
 const os = require('os');
 
 // info about the current user 
-console.log(os.userInfo());
+// console.log(os.userInfo());
 
-// system uptime 
-console.log(os.uptime());
+// // system uptime 
+// console.log(os.uptime());
 
 
-console.log(os.type());
+// console.log(os.type());
+console.log(os.arch());
+console.log(os.type())
