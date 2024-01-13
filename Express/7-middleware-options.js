@@ -1,33 +1,32 @@
-const express = require('express')
-const app = express()
-const morgan = require('morgan')
-const loggerMiddleWare = require('./express tutorial/5-logger')
-const authorize = require('./express tutorial/6-middleware')
+const express = require('express');
+const app = express();
+const morgan = require('morgan');
+const loggerMiddleWare = require('./5-logger');
+const authorize = require('./6-middleware');
 
-// req => middleware => res
-// app.use([loggerMiddleWare, authorize])
+// Middleware
+app.use([loggerMiddleWare, authorize]);
+app.use(morgan('dev'));
 
-app.use(morgan('dev'))
-
+// Routes
 app.get('/', (req, res) => {
-    // console.log(req.user);
-    res.send('Home 😒')
-})
+    res.send('Home 😒');
+});
+
 app.get('/about', (req, res) => {
-    res.send('About 🤔')
-})
+    res.send('About 🤔');
+});
+
 app.get('/api/products', (req, res) => {
-    res.send('products 🤔')
-})
+    res.send('Products 🤔');
+});
+
 app.get('/api/items', (req, res) => {
-    res.send('items 🤔')
-})
+    res.send('Items 🤔');
+});
 
-// server listening to the port
-app.listen(5000, () => {
-    console.log('Server is listening to the port 5000....');
-})
-
-
-
-
+// Server Listening
+const PORT = 5000;
+app.listen(PORT, () => {
+    console.log(`Server is listening on port ${PORT}....`);
+});
