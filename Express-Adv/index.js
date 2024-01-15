@@ -17,10 +17,10 @@ const logger = require('./logger');
 
 //Built-in Middleware
 app.use(express.json());
-
+//Built-in Middleware
 //url encoded Payroll   key=value $ key=value
 app.use(express.urlencoded({ extended: true }));
-
+//Built-in Middleware
 /// for sending css,html,js content
 app.use(express.static('public'))
 
@@ -35,9 +35,10 @@ console.log("Application mail Password:"+config.get('mail.password'));
 
 
 if (app.get('env')==='development'){
+    ///Third party middle ware
     app.use(morgan('tiny'));
     console.log("Morgan")
-}
+} 
 
 
 
