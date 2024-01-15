@@ -12,7 +12,13 @@ const logger = require('./logger');
 // console.log(`Node_env:${process.env.NODE_ENV}`);
 // console.log(`${app.get('env')}`);
 // JSON and URL-encoded middleware with options
+
+
+
+//Built-in Middleware
 app.use(express.json());
+
+//url encoded Payroll   key=value $ key=value
 app.use(express.urlencoded({ extended: true }));
 
 /// for sending css,html,js content
