@@ -16,13 +16,34 @@ console.log('Before');
 // }
 
 
-getUser(1)
-    .then(user => getRepo(user.githubUsername))
-    .then(respos => getCommits(respos[0]))
-    .then(commits => console.log(commits))
-    .catch(err => console.log('Error',err))
+// getUser(1)
+//     .then(user => getRepo(user.githubUsername))
+//     .then(respos => getCommits(respos[0]))
+//     .then(commits => console.log(commits))
+//     .catch(err => console.log('Error', err))
 
 
+
+
+
+/// async Await
+
+async function dispCommit(params) {
+  try{
+    const user = await getUser(1);
+    const repos = await getRepo(user.githubUsername);
+    const commits = await getCommits(repos[0])
+
+    console.log(commits)
+  }
+  catch(err){
+    console.log(err);
+
+  }
+
+}
+
+dispCommit()
 console.log('After');
 
 function getUser(id) {
@@ -41,6 +62,7 @@ function getRepo(username) {
         setTimeout(() => {
             console.log('Calling Github Repo');
             resolve(['repo1', 'repo2', 'repo3']);
+            // reject(new Error('Could not get eeror'))
         }, 2000);
     })
 
