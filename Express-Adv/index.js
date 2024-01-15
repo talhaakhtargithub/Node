@@ -8,8 +8,8 @@ const morgan = require('morgan');
 const config = require('config');
 const logger = require('./logger');
 
-
-// console.log(`Node_env:${process.env.NODE_ENV}`);
+// Cheking Enviornment
+console.log(`Node_env:${process.env.NODE_ENV}`);
 // console.log(`${app.get('env')}`);
 // JSON and URL-encoded middleware with options
 
@@ -27,18 +27,20 @@ app.use(express.static('public'))
 ///Third party middle ware
 app.use(helmet());
 
-//config
-
-console.log("Application name:"+config.get('name'));
-console.log("Application mail:"+config.get('mail.host'));
-console.log("Application mail Password:"+config.get('mail.password'));
 
 
-if (app.get('env')==='development'){
+//configuration
+
+console.log("Application name:" + config.get('name'));
+console.log("Application mail:" + config.get('mail.host'));
+console.log("Application mail Password:" + config.get('mail.password'));
+
+// Enviornment Checking
+if (app.get('env') === 'development') {
     ///Third party middle ware
     app.use(morgan('tiny'));
-    console.log("Morgan")
-} 
+    console.log("Morgan Enabled")
+}
 
 
 
